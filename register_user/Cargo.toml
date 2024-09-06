@@ -1,0 +1,9 @@
+[package]
+name = "register_user"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+domain = {version = "0.1.0", path = "domain"}
+rest_server = {version = "0.1.0", path = "rest_server"}
+lazy_static = { version = "1.5.0" }
