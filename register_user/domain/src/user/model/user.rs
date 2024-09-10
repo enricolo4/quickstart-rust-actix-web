@@ -1,12 +1,14 @@
+use uuid::Uuid;
+
 #[derive(Debug)]
 pub struct User {
-    pub id: String,
+    pub id: Uuid,
     pub name: String,
     pub email: String
 }
 
 impl User {
-    pub fn new(id: String, name: String, email: String) -> Self {
+    pub fn new(id: Uuid, name: String, email: String) -> Self {
         Self { id, name, email }
     }
 }

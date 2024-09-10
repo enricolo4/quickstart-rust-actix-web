@@ -16,7 +16,8 @@ impl CreateUseController {
         Json(response)
     }
 
-    fn create_new_user(&self, user_to_create_request_dto: Json<UserToCreateRequestDTO>) -> UserResponseDTO {
+    pub fn create_new_user(&self, user_to_create_request_dto: Json<UserToCreateRequestDTO>) -> UserResponseDTO {
         self.create_user_port.create(user_to_create_request_dto.0.to_model()).to_dto()
     }
 }
+

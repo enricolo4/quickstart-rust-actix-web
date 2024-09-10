@@ -1,9 +1,0 @@
-[package]
-name = "rest_server"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-domain = { version = "0.1.0", path = "../domain"}
-actix-web = { version = "4.9.0" }
-serde = { version = "1.0.209", features = ["derive"] }
