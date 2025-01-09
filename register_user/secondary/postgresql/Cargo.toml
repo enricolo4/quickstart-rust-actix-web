@@ -4,3 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+domain = { version = "0.1.0", path = "../../domain" }
+diesel = { version = "2.2.4", features = ["postgres"] }
+uuid = { version = "1.10.0", features = ["v4"] }
+dotenvy = "0.15"
