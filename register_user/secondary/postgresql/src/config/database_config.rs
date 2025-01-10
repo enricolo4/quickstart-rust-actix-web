@@ -1,4 +1,3 @@
-use std::env;
 use std::sync::Arc;
 use diesel::{r2d2, PgConnection};
 use diesel::r2d2::ConnectionManager;
@@ -27,11 +26,3 @@ lazy_static! {
 pub fn get_connection() -> r2d2::PooledConnection<ConnectionManager<PgConnection>> {
     POOL.get().expect("Failed to get connection from pool.")
 }
-
-// pub fn establish_connection() -> PgConnection {
-//     dotenv().ok();
-//
-//     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-//     PgConnection::establish(&database_url)
-//         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
-// }
