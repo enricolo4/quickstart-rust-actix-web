@@ -1,2 +1,5 @@
-pub use crate::user::dto::user_dto::{UserToCreateRequestDTO, UserToResponseDTO, UserResponseDTO};
-mod user_dto;
+pub use crate::user::dto::request::user_request_dto::UserToCreateRequestDTO;
+pub use crate::user::dto::response::user_response_dto::{UserResponseDTO, UsersResponseDTO, UserToResponseDTO, UsersToResponseDTO};
+
+mod request;
+mod response;

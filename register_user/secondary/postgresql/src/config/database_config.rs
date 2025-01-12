@@ -9,8 +9,9 @@ type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
 lazy_static! {
     static ref POOL: Arc<Pool> = {
         dotenv().ok();
-        let database_url = std::env::var("DATABASE_URL")
-            .expect("DATABASE_URL must be set");
+        let database_url = "postgres://test_user:test_pwd@localhost/test_db";
+        // std::env::var("DATABASE_URL")
+        //     .expect("DATABASE_URL must be set");
 
         let manager = ConnectionManager::<PgConnection>::new(database_url);
 

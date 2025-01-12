@@ -42,7 +42,7 @@ pub trait UserToCreateToDBO {
 impl UserToCreateToDBO for UserToCreate {
     fn to_dbo(&self) -> UserDBO {
         UserDBO::new(
-            Uuid::default(),
+            Uuid::new_v4(),
             self.name.to_string(),
             self.email.to_string(),
             Utc::now(),
