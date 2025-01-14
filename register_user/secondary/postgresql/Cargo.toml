@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 domain = { version = "0.1.0", path = "../../domain" }
+log = "0.4.22"
 
 [dependencies.lazy_static]
 version = "1.5.0"
@@ -12,6 +13,10 @@ version = "1.5.0"
 [dependencies.diesel]
 version = "2.2.6"
 features = ["postgres", "chrono", "uuid", "r2d2"]
+
+[dependencies.diesel_migrations]
+version = "2.0"
+features = ["postgres"]
 
 [dependencies.uuid]
 version = "1.11.1"

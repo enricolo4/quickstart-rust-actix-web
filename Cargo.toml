@@ -9,5 +9,4 @@ members = ["register_user"]
 [dependencies]
 register_user = { version = "0.1.0", path = "register_user"}
 actix-web = { version = "4.9.0" }
-futures = "0.3.*"
-actix-rt = "2.10.0"
+log = "0.4.25"

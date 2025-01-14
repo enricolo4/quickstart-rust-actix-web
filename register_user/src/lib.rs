@@ -7,6 +7,8 @@ pub use rest_server::user::controller::user_routes::user_routes::{create, get_by
 
 lazy_static! {
     pub static ref USER_CONTROLLER_CONTAINER: Arc<UserController> = {
+        let _ = postgresql::config::database_config::POOL.get();
+
         let _user_data_access_port = Arc::new(UserDataAccessAdapter::new());
         let _create_user_use_case = Arc::new(CreateUserUseCase::new(_user_data_access_port.clone()));
         let _get_user_use_case = Arc::new(GetUserUseCase::new(_user_data_access_port.clone()));
