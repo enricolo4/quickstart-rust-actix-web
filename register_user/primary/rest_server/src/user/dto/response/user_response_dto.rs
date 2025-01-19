@@ -3,9 +3,9 @@ use domain::user::model::User;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserResponseDTO {
-    id: String,
-    name: String,
-    email: String
+    pub id: String,
+    pub name: String,
+    pub email: String
 }
 
 #[derive(Debug, Serialize, Deserialize, Default)]
