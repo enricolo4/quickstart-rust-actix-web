@@ -69,7 +69,7 @@ To run all tests across all crates and modules (including unit, integration, and
 </details>
 
 <details>
-<summary>GET /users/{id}: Creates a new user.</summary>
+<summary>GET /users/{id}: Retrieves a user by ID.</summary>
 
 <p><b>Response:</b></p>
 <pre><code class="language-json">
@@ -87,7 +87,7 @@ To run all tests across all crates and modules (including unit, integration, and
 </details>
 
 <details>
-<summary>GET /users: Creates a new user.</summary>
+<summary>GET /users: Retrieves all users.</summary>
 
 <p><b>Response:</b></p>
 <pre><code class="language-json">
