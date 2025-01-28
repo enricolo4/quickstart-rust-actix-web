@@ -124,14 +124,29 @@ curl http://localhost:8080/ users/ < user_ id>
 
 ### Basic Structure
 ```mermaid
-graph LR A[REST Controller] --> B(Use Case); B --> C[Domain Entities]; B --> D(Data Access Port); D --> E[PostgreSQL Adapter];
+graph LR
+    A[REST Controller] -->|invoca| B[Use Case]
+    B -->|manipula| C[Domain Entities]
+    B -->|depende de| D[Data Access Port]
+    D -->|implementado por| E[PostgreSQL Adapter]
 ```
 
 ### Ports and Adapters
 ```mermaid
-graph LR subgraph Primary (Driving Adapters) A[REST Controller] --> B(Create User Use Case) A --> C(Get User Use Case) end
-subgraph Domain (Business Logic) B --> D{User} C --> D end
-subgraph Secondary (Driven Adapters) D --> E[PostgreSQL Adapter] end
+graph LR
+    subgraph "Primary (Driving Adapters)"
+        A[REST Controller] -->|invoca| B[Create User Port]
+        A -->|invoca| C[Get User Port]
+    end
+
+    subgraph "Domain (Business Logic)"
+        B -->|manipula| D[User Data Access Port]
+        C -->|consulta| D
+    end
+
+    subgraph "Secondary (Driven Adapters)"
+        D -->|persiste via| E[PostgreSQL Adapter]
+    end
 ```
 
 ## Dependencies
