@@ -149,6 +149,18 @@ graph LR
     end
 ```
 
+## User DataBase Structure
+```mermaid
+ erDiagram
+    users {
+        UUID id PK
+        TIMESTAMP created_at "NOT NULL"
+        TIMESTAMP modified_at "NULL"
+        VARCHAR(100) name "NOT NULL"
+        VARCHAR email "NOT NULL"
+    }
+```
+
 ## Dependencies
 
 
