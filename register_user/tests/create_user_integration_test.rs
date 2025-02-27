@@ -2,7 +2,7 @@
 mod create_user_integration_test {
     use actix_web::{test, App};
     use actix_web::web::Data;
-    use register_user::{create, USER_CONTROLLER_CONTAINER, USER_DATA_ACCESS_CONTAINER};
+    use register_user::{create, CREATE_USER_PORT, GET_USER_PORT, USER_DATA_ACCESS_CONTAINER};
     use serde_json::json;
     use testcontainers_modules::postgres;
     use testcontainers_modules::testcontainers::runners::AsyncRunner;
@@ -23,8 +23,9 @@ mod create_user_integration_test {
         // And(a running app)
         let app = test::init_service(
             App::new()
-                .app_data(Data::new(USER_CONTROLLER_CONTAINER.clone()))
+                .app_data(Data::new(CREATE_USER_PORT.clone()))
                 .service(create)
+                .app_data(Data::new(GET_USER_PORT.clone()))
                 .service(get_by_id)
                 .service(get_all)
         ).await;
