@@ -1,4 +1,6 @@
 use std::sync::Arc;
+use actix_web::{App, HttpServer};
+use actix_web::web::Data;
 pub use lazy_static::lazy_static;
 use domain::user::ports::secondary::UserDataAccessPort;
 use rest_server::user::controller::UserController;
@@ -23,4 +25,17 @@ lazy_static! {
 
         Arc::new(UserDataAccessAdapter::new())
     };
+}
+
+#[actix_web::main]
+pub async fn init_user_rest_server() -> std::io::Result<()> {
+    HttpServer::new(move || {
+        App::new()
+            .app_data(Data::new(USER_CONTROLLER_CONTAINER.clone()))
+            .service(create)
+            .service(get_by_id)
+            .service(get_all)
+    }).bind(("127.0.0.1", 8080))
+        ?.run()
+        .await
 }

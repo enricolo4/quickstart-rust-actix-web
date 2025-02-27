@@ -1,7 +1,5 @@
-use crate::init_server::init_rest_server;
-
-mod init_server;
+use register_user::init_user_rest_server;
 
 fn main() {
-    init_rest_server().unwrap()
+    init_user_rest_server().unwrap()
 }
