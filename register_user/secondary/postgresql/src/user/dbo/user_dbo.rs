@@ -1,14 +1,14 @@
 use diesel::{Insertable, Queryable, Selectable};
 use diesel::internal::derives::multiconnection::chrono::{DateTime, Utc};
-use uuid::Uuid;
 use domain::user::model::{User, UserToCreate};
 use crate::user::schema::schema::users;
+use tsid::create_tsid;
 
 #[derive(Insertable, Queryable, Selectable)]
 #[diesel(table_name = users)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct UserDBO {
-    pub id: Uuid,
+    pub id: i64,
     pub name: String,
     pub email: String,
     pub created_at: DateTime<Utc>,
@@ -17,7 +17,7 @@ pub struct UserDBO {
 
 impl UserDBO {
     pub fn new(
-        id: Uuid,
+        id: i64,
         name: String,
         email: String,
         created_at: DateTime<Utc>,
@@ -28,7 +28,7 @@ impl UserDBO {
 
     pub fn to_model(&self) -> User {
         User::new(
-            self.id,
+            self.id as u64,
             self.name.to_string(),
             self.email.to_string()
         )
@@ -42,7 +42,7 @@ pub trait UserToCreateToDBO {
 impl UserToCreateToDBO for UserToCreate {
     fn to_dbo(&self) -> UserDBO {
         UserDBO::new(
-            Uuid::new_v4(),
+            create_tsid().number() as i64,
             self.name.to_string(),
             self.email.to_string(),
             Utc::now(),

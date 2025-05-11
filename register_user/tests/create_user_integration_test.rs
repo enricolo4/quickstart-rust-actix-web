@@ -2,12 +2,12 @@
 mod create_user_integration_test {
     use actix_web::{test, App};
     use actix_web::web::Data;
-    use register_user::{create, CREATE_USER_PORT, GET_USER_PORT, USER_DATA_ACCESS_CONTAINER};
+
     use serde_json::json;
     use testcontainers_modules::postgres;
     use testcontainers_modules::testcontainers::runners::AsyncRunner;
-    use uuid::Uuid;
-    use rest_server::user::controller::user_routes::user_routes::{get_all, get_by_id};
+    use register_user::{CREATE_USER_PORT, GET_USER_PORT, USER_DATA_ACCESS_CONTAINER};
+    use rest_server::user::controller::user_routes::user_routes::{create, get_all, get_by_id};
     use rest_server::user::dto::UserResponseDTO;
 
     #[actix_web::test]
@@ -53,7 +53,7 @@ mod create_user_integration_test {
 
         let user_data_access_port = USER_DATA_ACCESS_CONTAINER.clone();
 
-        let user_id = Uuid::parse_str(&user_response_dto.id.as_str()).unwrap();
+        let user_id = user_response_dto.id.as_str().parse::<i64>().unwrap();
 
         // Then(save new user in database)
         let user = user_data_access_port.find_by_id(user_id).unwrap();

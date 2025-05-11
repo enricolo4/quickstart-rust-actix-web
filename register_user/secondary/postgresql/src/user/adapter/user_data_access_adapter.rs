@@ -1,6 +1,5 @@
 use diesel::{QueryDsl, RunQueryDsl, SelectableHelper};
 use diesel::dsl::insert_into;
-use uuid::Uuid;
 use domain::user::model::{User, UserToCreate};
 use domain::user::ports::secondary::UserDataAccessPort;
 use crate::config::database_config::get_connection;
@@ -23,7 +22,7 @@ impl UserDataAccessPort for UserDataAccessAdapter {
             .unwrap().to_model()
     }
 
-    fn find_by_id(&self, id: Uuid) -> Option<User> {
+    fn find_by_id(&self, id: i64) -> Option<User> {
         users
             .find(id)
             .select(UserDBO::as_select())

@@ -4,11 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-uuid = { version = "1.10.0", features = ["v4", "fast-rng", "macro-diagnostics"]}
+uuid = { version = "1.15.1", features = ["v4", "fast-rng", "macro-diagnostics"]}
 actix-web = { version = "4.9.0" }
 domain = {version = "0.1.0", path = "domain"}
 rest_server = {version = "0.1.0", path = "primary/rest_server" }
 postgresql = {version = "0.1.0", path = "secondary/postgresql" }
 lazy_static = { version = "1.5.0" }
-serde_json = {version = "1.0.135"}
-testcontainers-modules = { version = "0.11.5", features = ["postgres"] }
+serde_json = {version = "1.0.139"}
+testcontainers-modules = { version = "0.11.6", features = ["postgres"] }
+

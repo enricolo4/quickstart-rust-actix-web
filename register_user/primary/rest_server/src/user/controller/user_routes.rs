@@ -5,7 +5,6 @@ pub mod user_routes {
     use actix_web::{get, post, HttpResponse, Responder};
     use domain::user::ports::primary::{CreateUserPort, GetUserPort};
     use std::sync::Arc;
-    use uuid::Uuid;
 
     #[post("")]
     pub async fn create(
@@ -24,7 +23,7 @@ pub mod user_routes {
         get_user_port: Data<Arc<dyn GetUserPort>>,
         id: Path<String>,
     ) -> impl Responder {
-        let _id = Uuid::parse_str(id.into_inner().as_str()).unwrap();
+        let _id = id.into_inner().as_str().parse::<i64>().unwrap();
         let _response = match get_user_port.get_by_id(_id) {
             Some(user) => user.to_users_response_dto(),
             None => UsersResponseDTO::default()

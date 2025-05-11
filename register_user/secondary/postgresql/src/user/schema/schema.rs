@@ -2,7 +2,7 @@
 
 diesel::table! {
     users (id) {
-        id -> Uuid,
+        id -> BigInt,
         created_at -> Timestamptz,
         modified_at -> Nullable<Timestamptz>,
         #[max_length = 100]

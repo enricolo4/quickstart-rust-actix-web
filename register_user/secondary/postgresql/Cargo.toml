@@ -18,9 +18,8 @@ features = ["postgres", "chrono", "uuid", "r2d2"]
 version = "2.0"
 features = ["postgres"]
 
-[dependencies.uuid]
-version = "1.11.1"
-features = ["v4"]
-
 [dependencies.dotenvy]
 version = "0.15.7"
+
+[dependencies.tsid]
+version = "0.3.1"

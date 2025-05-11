@@ -7,6 +7,3 @@ edition = "2021"
 members = ["register_user"]
 
 [dependencies]
-register_user = { version = "0.1.0", path = "register_user"}
-actix-web = { version = "4.9.0" }
-log = "0.4.25"

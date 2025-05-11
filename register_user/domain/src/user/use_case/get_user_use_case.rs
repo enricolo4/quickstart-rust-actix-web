@@ -1,5 +1,4 @@
 use std::sync::Arc;
-use uuid::Uuid;
 use crate::user::model::User;
 use crate::user::ports::primary::GetUserPort;
 use crate::user::ports::secondary::UserDataAccessPort;
@@ -15,7 +14,7 @@ impl GetUserUseCase {
 }
 
 impl GetUserPort for GetUserUseCase {
-    fn get_by_id(&self, id: Uuid) -> Option<User> {
+    fn get_by_id(&self, id: i64) -> Option<User> {
         self.user_data_access_port.find_by_id(id)
     }
 
