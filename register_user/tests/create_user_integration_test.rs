@@ -53,10 +53,10 @@ mod create_user_integration_test {
 
         let user_data_access_port = USER_DATA_ACCESS_CONTAINER.clone();
 
-        let user_id = user_response_dto.id.as_str().parse::<i64>().unwrap();
+        let user_id = user_response_dto.id.as_str().parse::<u64>().unwrap();
 
         // Then(save new user in database)
-        let user = user_data_access_port.find_by_id(user_id).unwrap();
+        let user = user_data_access_port.find_by_id(user_id as i64).unwrap();
 
         assert_eq!(user_response_dto.name, "Test User");
         assert_eq!(user_response_dto.email, "test@example.com");
