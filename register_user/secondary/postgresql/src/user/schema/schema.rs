@@ -2,11 +2,12 @@
 
 diesel::table! {
     users (id) {
-        id -> BigInt,
+        id -> Int8,
         created_at -> Timestamptz,
         modified_at -> Nullable<Timestamptz>,
         #[max_length = 100]
         name -> Varchar,
         email -> Varchar,
+        cpf -> Varchar,
     }
 }

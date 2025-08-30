@@ -53,8 +53,42 @@ lazy_static! {
             info!("No migrations have been applied yet.");
         }
 
+        // Generate schema after running migrations
+        generate_schema();
+
         Arc::new(pool)
     };
+}
+
+fn generate_schema() {
+    use std::process::Command;
+    use std::env;
+    
+    info!("Generating schema...");
+    
+    let output = Command::new("diesel")
+        .args(&["print-schema"])
+        .current_dir("register_user/secondary/postgresql")
+        .env("DATABASE_URL", env::var("REGISTER_USER_DATABASE_URL").unwrap_or_default())
+        .output();
+    
+    match output {
+        Ok(result) => {
+            if result.status.success() {
+                let schema_content = String::from_utf8_lossy(&result.stdout);
+                if let Err(e) = std::fs::write("register_user/secondary/postgresql/src/user/schema/schema.rs", schema_content.as_bytes()) {
+                    info!("Failed to write schema file: {}", e);
+                } else {
+                    info!("Schema generated successfully!");
+                }
+            } else {
+                info!("Failed to generate schema: {}", String::from_utf8_lossy(&result.stderr));
+            }
+        }
+        Err(e) => {
+            info!("Failed to execute diesel command: {}", e);
+        }
+    }
 }
 
 pub fn get_connection() -> PollConnectionDataBase {

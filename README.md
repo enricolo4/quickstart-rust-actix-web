@@ -46,6 +46,31 @@ Integration tests reside in the `tests` directory and use Testcontainers. They a
 To run all tests across all crates and modules (including unit, integration, and doc tests if present):
  - cargo test --all
 
+### Database Migrations
+
+To create and manage database migrations using Diesel:
+
+#### Creating a New Migration
+```bash
+# Create a new migration (run from project root)
+diesel migration generate <migration_name> --migration-dir register_user/secondary/postgresql/migrations --database-url postgres://test_user:test_pwd@localhost/test_db
+```
+
+#### Running Migrations and Updating Schema
+```bash
+# Run migrations and update schema file
+diesel migration run --migration-dir register_user/secondary/postgresql/migrations --database-url postgres://test_user:test_pwd@localhost/test_db && diesel print-schema > register_user/secondary/postgresql/src/user/schema/schema.rs --database-url postgres://test_user:test_pwd@localhost/test_db
+```
+
+#### Other Useful Migration Commands
+```bash
+# Revert the latest migration
+diesel migration revert --migration-dir register_user/secondary/postgresql/migrations --database-url postgres://test_user:test_pwd@localhost/test_db
+
+# Check migration status
+diesel migration list --migration-dir register_user/secondary/postgresql/migrations --database-url postgres://test_user:test_pwd@localhost/test_db
+```
+
 ## API Endpoints
 <details>
 <summary>POST /users: Creates a new user.</summary>

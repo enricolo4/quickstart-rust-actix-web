@@ -33,7 +33,8 @@ mod create_user_integration_test {
         // When(call create user endpoint)
         let new_user = json!({
             "name": "Test User",
-            "email": "test@example.com"
+            "email": "test@example.com",
+            "cpf": "34349566899"
         });
 
         let request = test::TestRequest::post()
@@ -60,6 +61,7 @@ mod create_user_integration_test {
 
         assert_eq!(user_response_dto.name, "Test User");
         assert_eq!(user_response_dto.email, "test@example.com");
+        assert_eq!(user_response_dto.cpf, "34349566899");
         assert_eq!(user.id, user_id);
         assert_eq!(user.name, user_response_dto.name);
         assert_eq!(user.email, user_response_dto.email);

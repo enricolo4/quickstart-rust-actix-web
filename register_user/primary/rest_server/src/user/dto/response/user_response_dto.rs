@@ -5,7 +5,8 @@ use domain::user::model::User;
 pub struct UserResponseDTO {
     pub id: String,
     pub name: String,
-    pub email: String
+    pub email: String,
+    pub cpf: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, Default)]
@@ -15,8 +16,8 @@ pub struct UsersResponseDTO {
 }
 
 impl UserResponseDTO {
-    pub fn new(id: String, name: String, email: String) -> Self {
-        Self { id, name, email }
+    pub fn new(id: String, name: String, email: String, cpf: String) -> Self {
+        Self { id, name, email, cpf }
     }
 }
 
@@ -43,7 +44,8 @@ impl UserToResponseDTO for User  {
         UserResponseDTO::new (
             self.id.to_string(),
             self.name.to_string(),
-            self.email.to_string()
+            self.email.to_string(),
+            self.cpf.to_string()
         )
     }
 }

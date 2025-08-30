@@ -11,6 +11,7 @@ pub struct UserDBO {
     pub id: i64,
     pub name: String,
     pub email: String,
+    pub cpf: String,
     pub created_at: DateTime<Utc>,
     pub modified_at: Option<DateTime<Utc>>
 }
@@ -20,17 +21,18 @@ impl UserDBO {
         id: i64,
         name: String,
         email: String,
+        cpf: String,
         created_at: DateTime<Utc>,
         modified_at: Option<DateTime<Utc>>
-    ) -> Self {
-        Self { id, name, email, created_at, modified_at }
+    ) -> Self { Self { id, name, email, cpf, created_at, modified_at }
     }
 
     pub fn to_model(&self) -> User {
         User::new(
             self.id as u64,
             self.name.to_string(),
-            self.email.to_string()
+            self.email.to_string(),
+            self.cpf.to_string()
         )
     }
 }
@@ -45,6 +47,7 @@ impl UserToCreateToDBO for UserToCreate {
             create_tsid().number() as i64,
             self.name.to_string(),
             self.email.to_string(),
+            self.cpf.to_string(),
             Utc::now(),
             Some(Utc::now())
         )
